@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { User, Course, Task, CGPAEntry, ClassSession } from '../types';
 import { backend } from '../services/backend';
 import { PieChart, Pie, Cell, ResponsiveContainer, LineChart, Line, Tooltip } from 'recharts';
-import { AlertTriangle, CheckCircle, Clock, MapPin, ChevronRight, Loader2, Award } from 'lucide-react';
+import { AlertTriangle, CheckCircle, Clock, MapPin, Loader2, Award } from 'lucide-react';
 
 interface DashboardProps {
   user: User;
@@ -43,10 +43,26 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
 
           // Try to find next class
           const timetable = await backend.data.getTimetable(user.regNumber);
-          const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-          const today = days[Math.min(new Date().getDay() - 1, 4)]; // Default to Fri if weekend
-          if(timetable && timetable[today] && timetable[today].length > 0) {
-              setNextClass(timetable[today][0]); // Simplified: Just grab first of day
+          const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+          const now = new Date();
+          const dayIndex = now.getDay();
+          const dayName = days[dayIndex];
+
+          if (timetable && timetable[dayName] && timetable[dayName].length > 0) {
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const getMinutes = (timeStr: string) => {
+              const [h, m] = timeStr.split(':').map(Number);
+              return h * 60 + m;
+            };
+
+            // Find the first class that hasn't ended yet
+            // We sort by start time just in case, though usually it's sorted
+            const todaysClasses = [...timetable[dayName]].sort((a, b) => getMinutes(a.startTime) - getMinutes(b.startTime));
+            const upcoming = todaysClasses.find((c: ClassSession) => getMinutes(c.endTime) > currentMinutes);
+            
+            setNextClass(upcoming || null);
+          } else {
+            setNextClass(null);
           }
         }
       } catch (e) {
@@ -92,9 +108,6 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
               <span className="flex items-center gap-1"><Clock size={14}/> {nextClass.startTime}</span>
               <span className="flex items-center gap-1"><MapPin size={14}/> {nextClass.venue}</span>
             </div>
-          </div>
-          <div className="h-10 w-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-600">
-            <ChevronRight size={24} />
           </div>
         </div>
       ) : (

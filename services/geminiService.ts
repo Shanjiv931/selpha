@@ -1,9 +1,9 @@
 import { GoogleGenAI, Chat } from "@google/genai";
 import { Message } from "../types";
 
-// Always use const ai = new GoogleGenAI({apiKey: process.env.API_KEY}); as per guidelines.
-// The API key is obtained exclusively from the environment variable process.env.API_KEY.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+// Always use const ai = new GoogleGenAI({apiKey: process.env.GEMINI_API_KEY}); as per guidelines.
+// The API key is obtained exclusively from the environment variable process.env.GEMINI_API_KEY.
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY as string });
 
 let chatSession: Chat | null = null;
 
