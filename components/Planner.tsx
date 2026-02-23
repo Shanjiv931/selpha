@@ -126,8 +126,8 @@ export const Planner: React.FC = () => {
             />
           </div>
           
-          <div className="flex gap-2 items-end">
-            <div className="w-1/3">
+          <div className="flex flex-col sm:flex-row gap-2 items-end">
+            <div className="w-full sm:w-1/3">
                  <label className="block text-xs font-medium text-gray-700 mb-1">Type</label>
                  <select
                     className="w-full p-3 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -139,7 +139,7 @@ export const Planner: React.FC = () => {
                      <option value="Exam">Exam</option>
                  </select>
             </div>
-            <div className="flex-1">
+            <div className="w-full sm:flex-1">
                <label className="block text-xs font-medium text-gray-700 mb-1">Due Date</label>
                <input 
                 type="date"
@@ -148,7 +148,7 @@ export const Planner: React.FC = () => {
                 onChange={(e) => setNewTaskDeadline(e.target.value)}
               />
             </div>
-            <Button onClick={addTask} className="h-[46px] w-[46px] flex items-center justify-center flex-shrink-0 !p-0">
+            <Button onClick={addTask} className="w-full sm:w-[46px] h-[46px] flex items-center justify-center flex-shrink-0 !p-0 mt-2 sm:mt-0">
               <Plus size={24} />
             </Button>
           </div>

@@ -117,10 +117,10 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
       )}
 
       {/* Analytics Row */}
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 min-h-[180px]">
           <h3 className="text-sm font-semibold text-gray-500 mb-2">CGPA Trend</h3>
-          <div className="h-24">
+          <div className="h-32 w-full">
              <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={cgpaData}>
                   <Line type="monotone" dataKey="gpa" stroke="#4F46E5" strokeWidth={2} dot={false} />
@@ -129,17 +129,17 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
              </ResponsiveContainer>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center">
+        <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex flex-col justify-center items-center min-h-[180px]">
           <h3 className="text-sm font-semibold text-gray-500 mb-2">
               Attendance
           </h3>
-          <div className="relative w-20 h-20">
+          <div className="relative w-24 h-24">
              <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={[{ value: attendance }, { value: 100 - attendance }]}
-                    innerRadius={25}
-                    outerRadius={35}
+                    innerRadius={30}
+                    outerRadius={40}
                     paddingAngle={5}
                     dataKey="value"
                   >
@@ -150,7 +150,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ user }) => {
                 </PieChart>
              </ResponsiveContainer>
              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                 <span className={`font-bold ${isNinePointer ? 'text-green-600' : 'text-gray-700'}`}>{attendance}%</span>
+                 <span className={`font-bold text-lg ${isNinePointer ? 'text-green-600' : 'text-gray-700'}`}>{attendance}%</span>
                  {isNinePointer && <span className="text-[8px] uppercase font-bold text-green-600">Exempt</span>}
              </div>
           </div>

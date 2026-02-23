@@ -175,11 +175,11 @@ export const CourseManager: React.FC<CourseManagerProps> = ({ user }) => {
 
       {showAddModal && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-[2.5rem] p-8 sm:p-10 w-full max-w-xl relative shadow-2xl animate-in zoom-in duration-300 my-8">
-            <button onClick={() => setShowAddModal(false)} className="absolute top-8 right-8 text-gray-400 hover:text-black transition-colors"><X size={28} /></button>
+          <div className="bg-white rounded-[2rem] p-6 sm:p-10 w-full max-w-xl relative shadow-2xl animate-in zoom-in duration-300 my-8 mx-4">
+            <button onClick={() => setShowAddModal(false)} className="absolute top-6 right-6 text-gray-400 hover:text-black transition-colors"><X size={24} /></button>
             
-            <div className="mb-8">
-              <h3 className="text-3xl font-black text-black">Add Course</h3>
+            <div className="mb-6 sm:mb-8">
+              <h3 className="text-2xl sm:text-3xl font-black text-black">Add Course</h3>
               <p className="text-sm text-gray-500 font-bold mt-1">Register course to your Selpha student profile</p>
             </div>
 

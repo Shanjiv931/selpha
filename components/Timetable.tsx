@@ -352,7 +352,7 @@ export const Timetable: React.FC = () => {
         )}
       </div>
 
-      <div className="bg-gray-900 text-white p-8 rounded-[3rem] shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6 border-4 border-white">
+      <div className="bg-gray-900 text-white p-6 sm:p-8 rounded-[2rem] sm:rounded-[3rem] shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-6 border-4 border-white">
         <div className="flex items-center gap-6">
            <div className={`p-5 rounded-[1.5rem] shadow-inner ${timetableType === 'Theory' ? 'bg-blue-500/20 text-blue-400' : 'bg-purple-500/20 text-purple-400'}`}>
               <Clock size={32} />
